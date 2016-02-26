@@ -1,0 +1,16 @@
+<div ng-controller="UserController">
+	<p>Bucket List</p>
+	<a style= 'display: inline;' href='#/dashboard'> Home</a> | 
+	<a style= 'display: inline; float: right;' href='' ng-click="logout()"> Logout </a>
+</div>
+<div>
+	<h3 ng-controller='UserController'>{{name}}'s Bucket List</h3>
+	<h4>Pending</h4>
+	<div ng-repeat='list in lists'>
+		{{list.name}} | {{list.title}} - {{list.description}} - {{list.created_at | date: 'MMMM dd, yyyy'}}<br> 
+	</div>
+	<h4>Done</h4>
+	<div ng-repeat='done in dones'>
+		{{done.name}} | {{done.title}} - {{done.description}} - {{done.created_at | date: 'MMMM dd, yyyy'}}<br> 
+	</div>
+</div>

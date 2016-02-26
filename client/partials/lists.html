@@ -1,0 +1,32 @@
+<div ng-controller="UserController">
+	<p>Bucket List</p>
+	<a style= 'display: inline;' href='#/dashboard'> Home</a> | 
+	<a style= 'display: inline;' href='' ng-click="logout()"> Logout </a>
+	<hr>
+</div>
+<div ng-controller='ListsController'>
+	<h2 ng-controller='UserController'>Welcome, {{currentUser.name}}!</h2>
+	<div ng-controller='ListsController'>
+		<form  ng-submit='createList(newList)' novalidate name='addingList'>
+			<input ng-model='newList.title' name='title' placeholder="Title" ng-minlength='5' required/>
+			<input ng-model='newList.description' name='description' placeholder="Description" ng-minlength='10' required/>
+			<select ng-model="newList.name">
+				<option ng-repeat="name in names">{{name}}</option>
+			</select>
+			<button ng-show="addingList.$valid">Add to List</button>
+		</form>
+		<p><span ng-show='addingList.title.$error.minlength'>Title must be at least 5 characters!</span></p>
+		<p><span ng-show='addingList.description.$error.minlength'>Description must be at least 10 characters!</span></p>
+	</div>
+	<h4>Before I die I want to...</h4>
+	<div ng-repeat='list in lists' >
+		<form action="">
+		  <input type="checkbox" ng-click='done(list._id)' value={{list.name}} | {{list.title}} - {{list.description}} - {{list.created_at | date: 'MMMM dd, yyyy'}} />{{list.name}} | {{list.title}} - {{list.description}} - {{list.created_at | date: 'MMMM dd, yyyy'}}<br> 
+<!-- 		  <input type="submit" value="Submit">
+ -->		</form>
+	</div>
+	<h4>List of other users (Click to view profile): </h4>
+	<div ng-controller="UserController" ng-repeat="name in names">
+		<a href="#/user/:id">{{name}}</a><br>
+	</div>
+</div>
